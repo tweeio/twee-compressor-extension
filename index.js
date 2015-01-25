@@ -110,13 +110,13 @@ module.exports.extension = function() {
     var middlewareStack = [];
 
     // GZIP should always be first! because it is problem to handle response for html cleaning
-    if (twee.getConfig('twee:options:compress:gzip')) {
+    if (twee.getConfig('extension:twee-compressor:gzip')) {
         var compression = require('compression');
         middlewareStack.push(compression({threshold: 512}));
     }
 
     // Cleaning HTML
-    if (twee.getConfig('twee:options:compress:html')) {
+    if (twee.getConfig('extension:twee-compressor:html') && twee.getApplication().get('env') != 'development') {
         middlewareStack.push(function(req, res, next){
             var end = res.end;
             res.end = function(chunk, encoding){
@@ -138,11 +138,18 @@ module.exports.extension = function() {
 
 module.exports.dependencies = {
     // Session also should be first
-    "Twee Session": {
+    "Session": {
         "module": "twee-session-extension"
     },
     // Let static files to work first
-    "Twee Static Files": {
+    "Static Files": {
         "module": "twee-static-extension"
     }
+};
+
+module.exports.configNamespace = 'twee-compressor';
+
+module.exports.config = {
+    "html": true,
+    "gzip": true
 };
