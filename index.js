@@ -1,5 +1,7 @@
 "use strict";
 
+var md5 = require('MD5');
+
 /**
  * Removing all the html comments
  * @param html
@@ -42,12 +44,12 @@ function compressHTML(html, minify) {
     if (html === null || html === '' || !minify)
         return html;
 
-    html = removeHtmlComments(html);
+    //html = removeHtmlComments(html);
 
     var tags = ['script', 'textarea', 'pre', 'code'];
-    var id = '[' + new Date().getTime() + ']#';
+    var id = '#[twee-safe-block]';
     var cache = {};
-    var indexer = 0;
+    var indexer = 1;
     var length = tags.length;
     var REG_1 = /[\n\r\t]+/g;
     var REG_2 = /\s{3,}/g;
@@ -56,7 +58,7 @@ function compressHTML(html, minify) {
         var o = tags[i];
 
         var tagBeg = '<' + o;
-        var tagEnd = '</' + o;
+        var tagEnd = '</' + o + '>';
 
         var beg = html.indexOf(tagBeg);
         var end = 0;
@@ -68,7 +70,6 @@ function compressHTML(html, minify) {
             if (end === -1)
                 break;
 
-            var key = id + (indexer++);
             var value = html.substring(beg, end + len);
 
             if (i === 0) {
@@ -84,13 +85,15 @@ function compressHTML(html, minify) {
                     break;
             }
 
+            var key = md5(indexer++) + String(id);
             cache[key] = value;
             html = html.replace(value, key);
             beg = html.indexOf(tagBeg, beg + tagBeg.length);
         }
     }
 
-    html = html.replace(REG_1, ' ').replace(REG_2, ' ');
+    html = html.replace(REG_1, ' ');
+    html = html.replace(REG_2, ' ');
 
     var keys = Object.keys(cache);
     length = keys.length;
