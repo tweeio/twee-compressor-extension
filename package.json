@@ -1,9 +1,9 @@
 {
     "name": "twee-compressor-extension",
     "preferGlobal": false,
-    "version": "0.0.4",
+    "version": "0.0.5",
     "author": "Dmitri Mesin <dmitri.mesin@gmail.com>",
-    "homepage": "https://github.com/mesin/twee-compressor-extension",
+    "homepage": "https://github.com/tweeio/twee-compressor-extension",
     "description": "HTML Compressor Extension for Twee.io Framework - MVC Framework for Node.js based on Express.js",
     "license": "MIT",
     "dependencies": {
@@ -13,7 +13,7 @@
     "devDependencies": {},
     "repository": {
         "type": "git",
-        "url": "https://github.com/mesin/twee-compressor-extension.git"
+        "url": "https://github.com/tweeio/twee-compressor-extension.git"
     },
     "keywords": [
         "html",
@@ -33,6 +33,6 @@
         "api"
     ],
     "bugs": {
-        "url": "https://github.com/mesin/twee-compressor-extension/issues"
+        "url": "https://github.com/tweeio/twee-compressor-extension/issues"
     }
 }
