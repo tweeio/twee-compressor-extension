@@ -113,13 +113,13 @@ module.exports.extension = function() {
     var middlewareStack = [];
 
     // GZIP should always be first! because it is problem to handle response for html cleaning
-    if (twee.getConfig('extension:twee-compressor:gzip')) {
+    if (twee.getConfig('twee:extension:twee-compressor:gzip')) {
         var compression = require('compression');
         middlewareStack.push(compression({threshold: 512}));
     }
 
     // Cleaning HTML
-    if (twee.getConfig('extension:twee-compressor:html') && twee.getApplication().get('env') != 'development') {
+    if (twee.getConfig('twee:extension:twee-compressor:html') && twee.getApplication().get('env') != 'development') {
         middlewareStack.push(function(req, res, next){
             var end = res.end;
             res.end = function(chunk, encoding){

@@ -14,3 +14,23 @@ To install it use this command:
 ```
 npm install twee-compressor-extension --save
 ```
+
+Editing `package.json` of your application:
+
+```
+"dependencies": {
+    "twee-compressor-extension": "*"
+}
+```
+
+Turning extension `ON` in `application/configs/twee.js`:
+
+```
+module.exports = {
+    "extensions": {
+        "HTML Compressor": {
+            "module": "twee-compressor-extension"
+        }
+    }
+};
+```
